@@ -29,5 +29,5 @@ jobs:
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
         with:
-          personal_token: ${{ secrets.PAT_DEPLOY_TOKEN }}  # Use a Personal Access Token if needed
+          github_token: ${{ secrets.GITHUB_TOKEN }}  # Use a Personal Access Token if needed
           publish_dir: ./Proyecto/dist/proyecto  # Adjust the path to match your build output directory
