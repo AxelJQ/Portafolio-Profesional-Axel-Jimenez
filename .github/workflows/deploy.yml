@@ -24,7 +24,7 @@ jobs:
 
       - name: Build the Angular app
         working-directory: ./Proyecto  # Specify the subfolder where the Angular project is
-        run: npm run build -- --prod
+        run: npm run build -- --configuration production
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
