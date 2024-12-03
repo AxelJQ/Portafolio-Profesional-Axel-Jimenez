@@ -19,13 +19,15 @@ jobs:
           node-version: '20'  # Use the correct Node.js version
 
       - name: Install dependencies
+        working-directory: ./Proyecto  # Specify the subfolder where the Angular project is
         run: npm install
 
       - name: Build the Angular app
+        working-directory: ./Proyecto  # Specify the subfolder where the Angular project is
         run: npm run build -- --prod
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
         with:
           personal_token: ${{ secrets.PAT_DEPLOY_TOKEN }}  # Use a Personal Access Token if needed
-          publish_dir: ./Proyecto/dist  # Replace with your actual build output directory
+          publish_dir: ./Proyecto/dist/proyecto  # Adjust the path to match your build output directory
