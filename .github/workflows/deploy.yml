@@ -1,35 +1,31 @@
-name: Deploy Angular Project to GitHub Pages
+name: Deploy Angular to GitHub Pages
 
 on:
   push:
     branches:
-      - main  # Replace with your default branch name
+      - main  # Trigger on push to the main branch
 
 jobs:
-  build-and-deploy:
+  build:
     runs-on: ubuntu-latest
 
     steps:
-      # Step 1: Check out the repository
       - name: Checkout code
         uses: actions/checkout@v3
 
-      # Step 2: Set up Node.js
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '20'  # Use a compatible Node.js version
+          node-version: '20'  # Use the correct Node.js version
 
-      # Step 3: Install dependencies and build the Angular project
-      - name: Install dependencies and build
-        working-directory: ./Proyecto  # Replace 'subfolder' with your Angular project path
-        run: |
-          npm install
-          npm run build -- --output-path=dist --base-href="/<AxelJQ.github.io>/"
+      - name: Install dependencies
+        run: npm install
 
-      # Step 4: Deploy to GitHub Pages
+      - name: Build the Angular app
+        run: npm run build -- --prod
+
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./Proyecto/dist
+          personal_token: ${{ secrets.PAT_DEPLOY_TOKEN }}  # Use a Personal Access Token if needed
+          publish_dir: ./Proyecto/dist  # Replace with your actual build output directory
